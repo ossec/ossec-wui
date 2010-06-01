@@ -1,0 +1,10 @@
+# @(#) $Id: CONTRIB,v 1.2 2008/02/28 00:38:47 dcid Exp $ 
+# 
+
+Major contributors to the OSSEC WUI are listed below:
+
+  - Daniel B. Cid <dcid ( at ) ossec.net>
+  - Chris Abernethy - <chris.abernethy ( at ) ossec.net>
+  - Rafael Capovilla <under ( at ) underlinux.com.br>
+
+#EOF  

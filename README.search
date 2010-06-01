@@ -1,0 +1,38 @@
+OSSEC WEB UI v0.3
+Copyright (c) 2007-2008 Daniel B. Cid <dcid@ossec.net>
+
+
+** Information regarding the search options on the UI **
+
+
+
+Pattern: (string matching)
+Examples:
+         sshd: - only list alerts with sshd on the message
+         !snort - only list alerts that do not have snort on the message
+
+
+Srcip: (string matching)         
+         192.168.2 - only list events with a valid srcip from 192.168.2.xx
+         !1.2.3 - ignore alerts from 1.2.3
+         
+
+Rule id: (regex)
+Examples: 
+          30112|30111 - only list these two rules
+          (?!30112) - ignore rule 30112
+
+
+User: (string matching)
+Examples:
+         xyz - only list events with a valid username of xyz
+         !abc - ignore events with username abc
+
+
+Location (string matching)
+Examples:
+         agent1 - only list events from agent1
+         !192.168 - ignore events from any agent in this network                       
+
+
+# EOF         

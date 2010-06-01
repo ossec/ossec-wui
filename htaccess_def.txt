@@ -1,0 +1,16 @@
+# AuthUserFile $PWD/.htpasswd
+AuthName "Restricted Access"
+Require valid-user
+AuthType Basic
+
+<Files *.sh>
+  deny from all
+</Files>
+
+<Files ossec_conf.php>
+  deny from all
+</Files>
+
+<Files .*>
+  deny from all
+</Files>
