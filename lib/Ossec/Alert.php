@@ -46,11 +46,11 @@ class Ossec_Alert {
     function toHtml( ) {
 
         $date    = date('Y M d H:i:s', $this->time);
-        $id_link = "<a href=\"http://www.ossec.net/wiki/index.php/Rule:{$this->id}\">{$this->id}</a>";
+        $id_link = "<a href=\"http://www.ossec.net/doc/search.html?q={$this->id}\">{$this->id}</a>";
         $message = join( '<br/>', $this->msg );
 
         $srcip = "";
-        if( $this->srcip != '(none)') {
+        if( $this->srcip != '(none)' && $this->srcip != "") {
             $srcip = "<span style=\"font-weight:bold;\">Src IP</span>: {$this->srcip}<br/>";
         }
 

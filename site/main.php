@@ -1,7 +1,7 @@
 <?php
 /* @(#) $Id: main.php,v 1.12 2008/03/03 19:37:26 dcid Exp $ */
 
-/* Copyright (C) 2006-2008 Daniel B. Cid <dcid@ossec.net>
+/* Copyright (C) 2006-2013 Trend Micro
  * All rights reserved.
  *
  * This program is a free software; you can redistribute it
@@ -38,7 +38,8 @@ if(($agent_list = os_getagents($ossec_handle)) == NULL)
 
 
 /* Printing current date */
-echo '<div class="smaller2">'.date('F dS Y h:i:s A').'</div><br />';
+/* echo '<div class="smaller2">'.date('F dS Y h:i:s A').'</div><br />'; */
+echo '<div class="smaller2">'.date('F dS, Y h:i:s A').'</div><br />';
 
 
 /* Getting syscheck information */
