@@ -54,6 +54,11 @@ class Ossec_Alert {
             $srcip = "<span style=\"font-weight:bold;\">Src IP</span>: {$this->srcip}<br/>";
         }
 
+        $user = "";
+        if( $this->user != '') {
+            $user = "<span style=\"font-weight:bold;\">User</span>: {$this->user}<br/>";
+        }
+
         $class = "level_{$this->level} id_{$this->id} srcip_{$this->srcip}";
 
         return <<<HTML
@@ -63,6 +68,7 @@ class Ossec_Alert {
             level: {$this->level}<br />
             <span style="font-weight:bold;">Location:</span> {$this->location}<br />
             $srcip
+            $user
             <span style="font-weight:bold;">{$this->description}</span>
             <div class="msg">
                 $message
