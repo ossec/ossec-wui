@@ -41,8 +41,8 @@ function __os_getdb($file, $_name)
 
 
         /* Sanitizing input */
-        $buffer = ereg_replace("<", "&lt;", $buffer);
-        $buffer = ereg_replace(">", "&gt;", $buffer);
+        $buffer = preg_replace("/</", "&lt;", $buffer);
+        $buffer = preg_replace("/>/", "&gt;", $buffer);
 
 
         if(preg_match($skpattern, $buffer, $regs))

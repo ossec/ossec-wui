@@ -259,11 +259,29 @@ function __os_parsealert(&$fp, $curr_time,
         $evt_description = $token;
 
 
+/* Starting OSSEC 2.6, "Src IP:" and "User:" are optional in alerts.log */
+
+
         /* srcip */
-        $buffer = fgets($fp, 1024);
-        $buffer = rtrim($buffer);
+        $buffer = fgets($fp, 2048);
+
+ if(substr($buffer, 0, 7) === "Src IP:")
+{
+// run srcip code
+    $buffer = rtrim($buffer);
         $evt_srcip = substr($buffer, 8);
-        
+
+       /* Validate that string is an IP address*/
+        if(preg_match("^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}^", $evt_srcip))
+        {
+                /* valid IP */
+        }
+        else
+        {
+                $evt_srcip = '(none)';
+        }
+
+
         if($srcip_pattern != NULL)
         {
             if(strpos($evt_srcip,$srcip_pattern) === FALSE)
@@ -277,11 +295,15 @@ function __os_parsealert(&$fp, $curr_time,
                     continue;
             }
         }
-        
 
-        /* user */
-        $buffer = fgets($fp, 1024);
-        $buffer = rtrim($buffer);
+//read line to buffer
+$buffer = fgets($fp, 2048);
+}
+
+if(substr($buffer, 0, 5) === "User:")
+{
+// run user code
+$buffer = rtrim($buffer);
         if($buffer != "User: (none)")
         {
             $evt_user = substr($buffer, 6);
@@ -292,7 +314,7 @@ function __os_parsealert(&$fp, $curr_time,
         }
         if($user_pattern)
         {
-            if(($evt_user == NULL) || 
+            if(($evt_user == NULL) ||
                (strpos($evt_user, $user_pattern) === FALSE))
             {
                 if(!$rc_code_hash{'user_pattern'})
@@ -304,12 +326,15 @@ function __os_parsealert(&$fp, $curr_time,
                     continue;
             }
         }
-                                            
-        
+//read line to buffer
+$buffer = fgets($fp, 2048);
+}
+
+// move on to message
 
         /* message */
-        $buffer = fgets($fp, 2048);
-        $msg_id = 0;
+
+	$msg_id = 0;
         $evt_msg[$msg_id] = NULL;
         $pattern_matched = 0;
         while(strlen($buffer) > 3)
@@ -326,8 +351,8 @@ function __os_parsealert(&$fp, $curr_time,
             }
 
             $evt_msg[$msg_id] = rtrim($buffer);
-            $evt_msg[$msg_id] = ereg_replace("<", "&lt;", $evt_msg[$msg_id]);
-            $evt_msg[$msg_id] = ereg_replace(">", "&gt;", $evt_msg[$msg_id]);
+            $evt_msg[$msg_id] = preg_replace("/</", "&lt;", $evt_msg[$msg_id]);
+            $evt_msg[$msg_id] = preg_replace("/>/", "&gt;", $evt_msg[$msg_id]);
             $buffer = fgets($fp, 2048);
             $msg_id++;
             $evt_msg[$msg_id] = NULL;
@@ -358,12 +383,12 @@ function __os_parsealert(&$fp, $curr_time,
 
         // TODO: Why is this being done here? Can't we just use
         // htmlspecialchars() before emitting this to the browser?
-        $evt_user = ereg_replace("<", "&lt;", $evt_user);
-        $evt_user = ereg_replace(">", "&gt;", $evt_user);
+        $evt_user = preg_replace("/</", "&lt;", $evt_user);
+        $evt_user = preg_replace("/>/", "&gt;", $evt_user);
         $alert->user = $evt_user;
 
-        $evt_srcip = ereg_replace("<", "&lt;", $evt_srcip);
-        $evt_srcip = ereg_replace(">", "&gt;", $evt_srcip);
+        $evt_srcip = preg_replace("/</", "&lt;", $evt_srcip);
+        $evt_srcip = preg_replace("/>/", "&gt;", $evt_srcip);
         $alert->srcip = $evt_srcip;
 
         $alert->description = $evt_description;
@@ -839,7 +864,7 @@ function os_getalerts($ossec_handle, $init_time, $final_time, $max_count)
         if($f_size > $f_point)
         {
             $seek_place = $f_size - $f_point;
-            fseek($fp, $seek_place, "SEEK_SET");
+            fseek($fp, $seek_place, SEEK_SET);
         }
     }
     

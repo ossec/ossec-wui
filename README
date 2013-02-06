@@ -1,5 +1,5 @@
-OSSEC WEB UI v0.3
-Copyright (c) 2006-2008 Daniel B. Cid <dcid@ossec.net>
+OSSEC Web UI v0.3+
+Copyright (c) 2006-2013 Trend Micro Inc.
 
 
 1- How to install.
@@ -15,27 +15,34 @@ Copyright (c) 2006-2008 Daniel B. Cid <dcid@ossec.net>
     # wget http://www.ossec.net/files/ui/ossec-wui-0.3.tar.gz
 
 
-1.2- Uncompress/untar and move the files to somewhere acessible by
+1.2- Decompress/untar and move the files to somewhere acessible by
      your web server:
 
     # tar -zxvf ossec-wui-0.3.tar.gz
     # mv ossec-wui* /var/www/htdocs/ossec-wui
 
 
-1.3- Run the setup script
+1.3- Run the setup script (assign username/password...):
 
     # cd /var/www/htdocs/ossec-wui
     # ./setup.sh
+    ...
 
 
-1.4- Add your web server user to the ossec group:
+1.4- Add your web server user (apache, www-data or nobody) to the ossec group:
 
     # vi /etc/group
     ..
     From:
         ossec:x:1002:
-    To (if your web server user is www):
-        ossec:x:1002:www
+    To (if your web server user is www-data):
+        ossec:x:1002:www-data
+
+1.5- Fix the permissions for the tmp directory of your OSSEC installation (e.g., /var/ossec/tmp) and restart Apache
+
+    # chmod 770 tmp/
+    # chgrp www-data tmp/
+    # apachectl restart 
 
 
 1.5- If you have a large ossec install, you may want to
@@ -50,6 +57,7 @@ Copyright (c) 2006-2008 Daniel B. Cid <dcid@ossec.net>
      
 1.6- Try to access the UI.
 
+     http ://anyhost/ossec-wui/
 
 1.7- Report any problems or suggestions to our mailing list.     
 

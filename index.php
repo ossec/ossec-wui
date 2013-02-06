@@ -168,11 +168,8 @@ else
     <!-- END: content -->
     <br /><br />
     <br /><br />
-    <br /><br />
-    <br /><br />
     </div>
     </div>
-            	
 
 <?php
     /* Including the footer */
