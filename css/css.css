@@ -5,6 +5,9 @@
 * Version:                                1.0
 * Author:                                 Dr. Web Magazin
 * Author URI:                             http:/www.drweb.de/
+*
+* Revision:
+* - Ryan Schulze Jun. 23rd 2012, wider output, cleaned up some of the entries
 */
 
 img
@@ -13,9 +16,9 @@ img
 }
 body
 {
-	background: #696969 url('images/pagebg.gif') 50% 0;
+	background: #CDCDCD;
 	color: #222;
-	font: 62.5% Georgia, "Times New Roman", Times, serif;
+	font: 82.5% Helvetica, Arial, serif;
 	text-align: center;
 }
 *
@@ -26,15 +29,14 @@ body
 #header
 {
 	margin: 0 auto 0 auto;
-	width: 802px;
+	width: 1000px;
+	padding: 10px;
 }
 #headertitle
 {
 	background: #fff;
 	height: 84px;
-	margin: 0 auto 0 auto;
 	text-align: left;
-	width: 802px;
 }
 #headercontent
 {
@@ -42,10 +44,9 @@ body
 	color: #fff;
 	display: block;
 	height: 130px;
-	margin: 0 auto 0 auto;
 	position: relative;
 	text-align: left;
-	width: 802px;
+	width: 1000px;
 }
 #headerintro
 {
@@ -131,7 +132,7 @@ pre
 	font-size: 1.3em;
 	margin: 0 0 1.5em 0;
 	overflow: auto;
-	width: 700px;
+	width: 950px;
 }
 * html pre
 {
@@ -282,26 +283,28 @@ h4 a:hover
 #container
 {
 	margin: 0 auto 0 auto;
-	width: 770px;
+	width: 1000px;
+	padding: 10px;
 }
 #content_box
 {
 	clear: both;
 	float: left;
 	text-align: left;
-	width: 770px;
+	padding: 10px;
+	background: white;
+	width: 980px;
 }
 #content
 {
 	float: left;
 	padding: 0 40px 0 0;
-	width: 700px;
+	width: 100%;
 }
 #contentman
 {
 	float: left;
 	padding: 0 40px 0 0;
-	width: 700px;
 }
 * html #content
 {
@@ -309,12 +312,11 @@ h4 a:hover
 }
 #footer
 {
-	border-top: 2px solid #ccc;
 	clear: both;
-	float: left;
+	margin: 0 auto 0 auto;
 	font: 1.1em/1.4em Helvetica, Arial, sans-serif;
-	padding: 1.0em 0;
-	width: 770px;
+	padding: 10px;
+	width: 1000px;
 }
 #nav_h ul
 {
@@ -341,8 +343,9 @@ h4 a:hover
 	border-bottom: 4px solid #f26827;
 	float: left;
 	list-style: none;
-	margin-bottom: 22px;
+	margin-bottom: 5px;
 	width: 100%;
+	background:white;
 }
 #nav ul
 {
@@ -657,6 +660,29 @@ table tr.alert
 	margin: 0;
 	margin-left: 0;
 	padding: 0;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #F26827;
+}
+.alertlevel
+{
+	font-weight:bold;
+}
+.alertdate
+{
+	float:right;
+	font-weight:bold;
+}
+.alertindent
+{
+	font-weight:bold;
+	width:75px;
+	float:left;
+}
+.alertdescription
+{
+	font-weight:bold;
+	color:#039;
 }
 table tr.msg
 {
@@ -672,11 +698,11 @@ span.asmall
 }
 .statssmall
 {
-	font-size: 12px;
+	font-size: 11px;
 }
 a.asmall
 {
-	font-size: 10px;
+	font-size: 11px;
 }
 a.bigg
 {
@@ -688,7 +714,7 @@ div.asmall
 }
 div.smaller
 {
-	font-size: 9px;
+	font-size: 11px;
 }
 div.smaller2
 {
@@ -725,12 +751,18 @@ ul.ulsmall
 }
 .msg
 {
-	background-color: #FFFFFF;
+	background-color: lightGrey;
 	font-family: Verdana, Arial, Helvetica, Tahoma, sans-serif;
-	font-size: 10px;
+	font-size: 11px;
 	margin: 0;
 	margin-left: 0;
 	padding: 0;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 10px;
+	-webkit-border-radius: 0px 0px 3px 3px;
+	-moz-border-radius: 0px 0px 3px 3px;
+	border-radius: 0px 0px 3px 3px;
 }
 ul.message
 {
@@ -744,7 +776,7 @@ ul.message
 	border: 1px solid #666;
 	color: #FFFFFF;
 	font-family: Verdana, Arial, Helvetica, Tahoma, sans-serif;
-	font-size: 9px;
+	font-size: 10px;
 	font-weight: bold;
 }
 .text
@@ -765,7 +797,7 @@ ul.message
 	background-color: #DEDFDE;
 	border: 1px solid #C1C1C1;
 	color: #000000;
-	font: 9px arial, helvetica, sans-serif;
+	font: 12px arial, helvetica, sans-serif;
 }
 .formSelect
 {
