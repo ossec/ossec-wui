@@ -262,8 +262,8 @@ function os_syscheck_dumpdb($ossec_handle, $agent_name)
                 continue;
             }
 
-            $filepattern = "/^\(([a-zA-Z0-9_-]+)\) ".
-                           "[0-9\._]+->([a-zA-Z_-]+)$/";
+            $filepattern = "/^\(([\.a-zA-Z0-9_-]+)\) ".
+                           "([0-9\._]+|any)->([a-zA-Z_-]+)$/";
             if(preg_match($filepattern, $file, $regs))
             {
                 if($regs[2] == "syscheck-registry")
@@ -327,7 +327,7 @@ function os_getsyscheck($ossec_handle)
             }
 
             $filepattern = "/^\(([\.a-zA-Z0-9_-]+)\) ".
-                           "[0-9\._]+->([a-zA-Z_-]+)$/";
+                           "([0-9\._]+|any)->([a-zA-Z_-]+)$/";
             if(preg_match($filepattern, $file, $regs))
             {
                 if($regs[2] == "syscheck-registry")
