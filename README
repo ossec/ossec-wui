@@ -1,4 +1,4 @@
-OSSEC Web UI v0.8-beta
+OSSEC Web UI v0.8
 Copyright (c) 2006-2013 Trend Micro Inc.
 
 
@@ -42,24 +42,24 @@ Copyright (c) 2006-2013 Trend Micro Inc.
 
     # chmod 770 tmp/
     # chgrp www-data tmp/
-    # apachectl restart 
+    # apachectl restart
 
 
 1.5- If you have a large ossec install, you may want to
      re-configure PHP to support longer lasting scripts
      and higher memory utilization. The following entries
      on php.ini can be increased:
-     
+
      max_execution_time = 180
      max_input_time = 180
      memory_limit = 30M
-     
-     
+
+
 1.6- Try to access the UI.
 
      http ://anyhost/ossec-wui/
 
-1.7- Report any problems or suggestions to our mailing list.     
+1.7- Report any problems or suggestions to our mailing list.
 
 
 #EOF
