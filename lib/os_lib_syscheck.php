@@ -94,13 +94,16 @@ function __os_getdb($file, $_name)
          <br /><br />
          <h2>Latest modified files:</h2><br />
          ';
-    arsort($mod_list);
-    foreach ($mod_list as $mod_date => $val)
+    if (isset($mod_list))
     {
-        echo "<b>".date('Y M d', $mod_date)."</b>&nbsp; &nbsp;";
-        echo '<a class="bluez" href="#id_'.$val[0].'">'.$val[1].'</a>
-              <br />
-             ';   
+        arsort($mod_list);
+        foreach ($mod_list as $mod_date => $val)
+        {
+            echo "<b>".date('Y M d', $mod_date)."</b>&nbsp; &nbsp;";
+            echo '<a class="bluez" href="#id_'.$val[0].'">'.$val[1].'</a>
+                  <br />
+                 ';   
+        }
     }
     
     echo "\n<br /><h2>Integrity Checking database: $_name</h2>\n";
