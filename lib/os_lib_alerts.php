@@ -576,7 +576,7 @@ function os_searchalerts($ossec_handle, $search_id,
 
     /* Getting first file */
     $init_loop = $init_time;
-    while($init_loop <= $final_time)
+    while($init_loop < $final_time + 86400)
     {
         $l_year_month = date('Y/M',$init_loop);
         $l_day = date('d',$init_loop);
