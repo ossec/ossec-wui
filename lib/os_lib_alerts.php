@@ -272,7 +272,7 @@ function __os_parsealert(&$fp, $curr_time,
         $evt_srcip = substr($buffer, 8);
 
        /* Validate that string is an IP address*/
-        if(preg_match("^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}^", $evt_srcip))
+        if(filter_var($evt_srcip, FILTER_VALIDATE_IP))
         {
                 /* valid IP */
         }
