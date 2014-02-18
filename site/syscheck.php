@@ -19,7 +19,7 @@ $USER_file = NULL;
 
 
 /* Getting user patterns */
-$strpattern = "/^[0-9a-zA-Z._^ -]{1,128}$/";
+$strpattern = "/^[0-9a-zA-Z.:_^ -]{1,128}$/";
 if(isset($_POST['agentpattern']))
 {
     if(preg_match($strpattern, $_POST['agentpattern']) == true)

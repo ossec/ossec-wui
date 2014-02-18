@@ -94,7 +94,7 @@ if(isset($_POST['dstport']))
 /* Getting location */
 if(isset($_POST['locationpattern']))
 {
-    $lcpattern = "/^[0-9a-zA-Z. _|^!>\/\\-]{1,156}$/";    
+    $lcpattern = "/^[0-9a-zA-Z.: _|^!>\/\\-]{1,156}$/";    
     if(preg_match($lcpattern, $_POST['locationpattern']) == true)
     {
         $USER_location = $_POST['locationpattern'];

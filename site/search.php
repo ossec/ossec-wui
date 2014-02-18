@@ -135,7 +135,7 @@ if(isset($_POST['page']))
 }
 
 
-$strpattern = "/^[0-9a-zA-Z. _|^!\-()?]{1,128}$/";
+$strpattern = "/^[0-9a-zA-Z.: _|^!\-()?]{1,128}$/";
 $intpattern = "/^[0-9]{1,8}$/";
 
 if(isset($_POST['strpattern']))
@@ -151,7 +151,7 @@ if(isset($_POST['strpattern']))
 /* Getting location */
 if(isset($_POST['locationpattern']))
 {
-    $lcpattern = "/^[0-9a-zA-Z. _|^!>\/\\-]{1,156}$/";    
+    $lcpattern = "/^[0-9a-zA-Z.: _|^!>\/\\-]{1,156}$/";    
     if(preg_match($lcpattern, $_POST['locationpattern']) == true)
     {
         $LOCATION_pattern = $_POST['locationpattern'];
