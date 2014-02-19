@@ -19,7 +19,7 @@ if [ ! "X$hs" = "Xa" ]; then
     else
         ECHO=echo
     fi
-fi        
+fi
 
 # Looking for htpasswd
 HTPWDCMD="htpasswd"
@@ -29,8 +29,8 @@ if [ ! $? = 0 ]; then
     ls "`which $HTPWDCMD`" > /dev/null 2>&1
     if [ ! $? = 0 ]; then
         HTPWDCMD=""
-    fi    
-fi    
+    fi
+fi
 
 
 # Default options
@@ -45,9 +45,9 @@ echo ""
 
 ls $HT_DEFAULT > /dev/null 2>&1
 if [ ! $? = 0 ]; then
-    echo "** ERROR: Could not find '$HT_DEFAULT'. Unable to continue."    
+    echo "** ERROR: Could not find '$HT_DEFAULT'. Unable to continue."
     ERRORS=1;
-fi    
+fi
 
 
 # 1- Create .htaccess blocking access to private directories.
@@ -58,7 +58,7 @@ for i in $PRIV_DIRS; do
     echo $HT_DIR_ACCESS > ./$i/.htaccess;
 done
 
-# 2- Create. htaccess blocking access to .sh and config files.    
+# 2- Create. htaccess blocking access to .sh and config files.
 echo $HT_FLZ_ACCESS > ./.htaccess;
 echo "" >> ./.htaccess;
 cat $HT_DEFAULT >> ./.htaccess;
@@ -71,18 +71,18 @@ while [ 1 ]; do
         read MY_USER;
     else
         break;
-    fi        
+    fi
 done
 
 if [ "X$HTPWDCMD" = "X" ]; then
-    echo "** ERROR: Could not find htpasswd. No password set."    
+    echo "** ERROR: Could not find htpasswd. No password set."
     ERRORS=1;
 else
     $HTPWDCMD -c $PWD/.htpasswd $MY_USER
     if [ ! $? = 0 ]; then
         ERRORS=1;
-    fi    
-fi    
+    fi
+fi
 
 # Adjust permissions for ossec-wui
 echo "Enter your web server user name (e.g. apache, www, nobody, www-data, ...)"
@@ -102,4 +102,4 @@ if [ $ERRORS = 0 ]; then
 else
     echo ""
     echo "Setup failed to complete."
-fi        
+fi
