@@ -10,15 +10,14 @@ Copyright (c) 2006-2013 Trend Micro Inc.
     - OSSEC (version >= 0.9-3) already installed.
 
 
-1.1- Download the web ui package:
+1.1- Clone the web ui script:
 
-    # wget http://www.ossec.net/files/ui/ossec-wui-0.3.tar.gz
+    # git clone https://github.com/ossec/ossec-wui.git
 
 
-1.2- Decompress/untar and move the files to somewhere acessible by
+1.2-Move the folder to somewhere acessible by
      your web server:
 
-    # tar -zxvf ossec-wui-0.3.tar.gz
     # mv ossec-wui* /var/www/htdocs/ossec-wui
 
 
