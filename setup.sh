@@ -86,14 +86,14 @@ fi
 
 # Adjust permissions for ossec-wui
 echo "Enter your web server user name (e.g. apache, www, nobody, www-data, ...)"
-read GROUP
-OSSEC=`grep ossec /etc/group`
-NEWLINE=$OSSEC$GROUP
-sed "s/$OSSEC/$NEWLINE/" -i /etc/group
-echo "Enter your OSSEC install directory path (e.g. /var/ossec)"
-read INSTALL
-chmod 770 $INSTALL/tmp/
-chgrp $GROUP $INSTALL/tmp/
+read HTTPDUSER
+OSSEC=`grep ^ossec: /etc/group`
+if ! (echo $OSSEC | grep -w $HTTPDUSER) > /dev/null 2>&1; then
+    NEWLINE="$OSSEC,$HTTPDUSER"
+    NEWLINE=`echo $NEWLINE | sed -e 's/:,/:/'`
+    sed "s/$OSSEC/$NEWLINE/" -i /etc/group
+fi
+
 echo "You must restart your web server after this setup is done."
 
 if [ $ERRORS = 0 ]; then
