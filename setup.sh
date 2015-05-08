@@ -85,16 +85,20 @@ else
 fi
 
 # Adjust permissions for ossec-wui
-echo "Enter your web server user name (e.g. apache, www, nobody, www-data, ...)"
-read HTTPDUSER
 OSSEC=`grep ^ossec: /etc/group`
-if ! (echo $OSSEC | grep -w $HTTPDUSER) > /dev/null 2>&1; then
-    NEWLINE="$OSSEC,$HTTPDUSER"
-    NEWLINE=`echo $NEWLINE | sed -e 's/:,/:/'`
-    sed "s/$OSSEC/$NEWLINE/" -i /etc/group
+if grep ^ossec: /etc/group > /dev/null 2>&1; then
+    echo "Enter your web server user name (e.g. apache, www, nobody, www-data, ...)"
+    read HTTPDUSER
+    if ! (echo $OSSEC | grep -w $HTTPDUSER) > /dev/null 2>&1; then
+        NEWLINE="$OSSEC,$HTTPDUSER"
+        NEWLINE=`echo $NEWLINE | sed -e 's/:,/:/'`
+        sed "s/$OSSEC/$NEWLINE/" -i /etc/group
+        echo "You must restart your web server after this setup is done."
+    fi
+else
+    echo "ossec group does not exist."
+    ERRORS=1
 fi
-
-echo "You must restart your web server after this setup is done."
 
 if [ $ERRORS = 0 ]; then
     echo ""
