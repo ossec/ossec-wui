@@ -9,6 +9,8 @@ cd $LOCAL
 PWD=`pwd`
 ERRORS=0;
 
+trap "rm -f $TMPFILE; exit" SIGHUP SIGINT SIGTERM
+
 # Looking for echo -n
 ECHO="echo -n"
 hs=`echo -n "a"`
@@ -92,7 +94,10 @@ if grep ^ossec: /etc/group > /dev/null 2>&1; then
     if ! (echo $OSSEC | grep -w $HTTPDUSER) > /dev/null 2>&1; then
         NEWLINE="$OSSEC,$HTTPDUSER"
         NEWLINE=`echo $NEWLINE | sed -e 's/:,/:/'`
-        sed "s/$OSSEC/$NEWLINE/" -i /etc/group
+        TMPFILE=`mktemp`
+        sed "s/$OSSEC/$NEWLINE/" /etc/group > $TMPFILE
+        cp $TMPFILE /etc/group
+        rm -f $TMPFILE
         echo "You must restart your web server after this setup is done."
     fi
 else
