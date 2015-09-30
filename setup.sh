@@ -98,7 +98,7 @@ echo "You must restart your web server after this setup is done."
 
 if [ $ERRORS = 0 ]; then
     echo ""
-    echo "Setup completed successfuly."
+    echo "Setup completed successfully."
 else
     echo ""
     echo "Setup failed to complete."
