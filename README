@@ -49,7 +49,7 @@ Copyright (c) 2006-2013 Trend Micro Inc.
     allow httpd_t var_log_t:file read;
     allow httpd_t var_t:file { read getattr open };
 
-     The run the following commands as root:
+     Then run the following commands as root:
 
     checkmodule -M -m ossec-wui.te -o ossec-wui.mod
     semodule_package -o ossec-wui.pp -m ossec-wui.mod
