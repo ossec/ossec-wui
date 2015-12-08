@@ -39,12 +39,14 @@ Copyright (c) 2006-2013 Trend Micro Inc.
     module ossec-wui 1.0;
 
     require {
+	type var_log_t;
         type httpd_t;
         type var_t;
         class file { read getattr open };
     }
 
     #============= httpd_t ==============
+    allow httpd_t var_log_t:file read;
     allow httpd_t var_t:file { read getattr open };
 
      The run the following commands as root:
