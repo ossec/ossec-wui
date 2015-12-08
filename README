@@ -67,9 +67,6 @@ Copyright (c) 2006-2013 Trend Micro Inc.
 
 1.6- Try to access the UI.
 
-     http ://anyhost/ossec-wui/
+     http://anyhost/ossec-wui/
 
 1.7- Report any problems or suggestions to our mailing list.
-
-
-#EOF
