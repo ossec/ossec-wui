@@ -15,7 +15,7 @@ Copyright (c) 2006-2013 Trend Micro Inc.
     # git clone https://github.com/ossec/ossec-wui.git
 
 
-1.2-Move the folder to somewhere acessible by
+1.2- Move the folder to somewhere acessible by
      your web server:
 
     # mv ossec-wui* /var/www/htdocs/ossec-wui
@@ -28,21 +28,32 @@ Copyright (c) 2006-2013 Trend Micro Inc.
     ...
 
 
-1.4- Add your web server user (apache, www-data or nobody) to the ossec group:
+1.4- If selinux is enabled, ossec-wui is normally unable to access 
+     various ossec log files.  One way to fix this is to install a 
+     selinux targeted policy.
 
-    # vi /etc/group
-    ..
-    From:
-        ossec:x:1002:
-    To (if your web server user is www-data):
-        ossec:x:1002:www-data
+     Create a TE file (eg. 
+     /etc/seliinux/targeted/ossec-wui/ossec-wui.te) with the following 
+     content:
 
-1.5- Fix the permissions for the tmp directory of your OSSEC installation (e.g., /var/ossec/tmp) and restart Apache
+    module ossec-wui 1.0;
 
-    # chmod 770 tmp/
-    # chgrp www-data tmp/
-    # apachectl restart
+    require {
+	type var_log_t;
+        type httpd_t;
+        type var_t;
+        class file { read getattr open };
+    }
 
+    #============= httpd_t ==============
+    allow httpd_t var_log_t:file read;
+    allow httpd_t var_t:file { read getattr open };
+
+     Then run the following commands as root:
+
+    checkmodule -M -m ossec-wui.te -o ossec-wui.mod
+    semodule_package -o ossec-wui.pp -m ossec-wui.mod
+    semodule -i ossec-wui.pp 
 
 1.5- If you have a large ossec install, you may want to
      re-configure PHP to support longer lasting scripts
@@ -56,9 +67,6 @@ Copyright (c) 2006-2013 Trend Micro Inc.
 
 1.6- Try to access the UI.
 
-     http ://anyhost/ossec-wui/
+     http://anyhost/ossec-wui/
 
 1.7- Report any problems or suggestions to our mailing list.
-
-
-#EOF

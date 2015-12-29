@@ -9,6 +9,8 @@ cd $LOCAL
 PWD=`pwd`
 ERRORS=0;
 
+trap "rm -f $TMPFILE; exit" SIGHUP SIGINT SIGTERM
+
 # Looking for echo -n
 ECHO="echo -n"
 hs=`echo -n "a"`
@@ -85,16 +87,23 @@ else
 fi
 
 # Adjust permissions for ossec-wui
-echo "Enter your web server user name (e.g. apache, www, nobody, www-data, ...)"
-read GROUP
-OSSEC=`grep ossec /etc/group`
-NEWLINE=$OSSEC$GROUP
-sed "s/$OSSEC/$NEWLINE/" -i /etc/group
-echo "Enter your OSSEC install directory path (e.g. /var/ossec)"
-read INSTALL
-chmod 770 $INSTALL/tmp/
-chgrp $GROUP $INSTALL/tmp/
-echo "You must restart your web server after this setup is done."
+OSSEC=`grep ^ossec: /etc/group`
+if grep ^ossec: /etc/group > /dev/null 2>&1; then
+    echo "Enter your web server user name (e.g. apache, www, nobody, www-data, ...)"
+    read HTTPDUSER
+    if ! (echo $OSSEC | grep -w $HTTPDUSER) > /dev/null 2>&1; then
+        NEWLINE="$OSSEC,$HTTPDUSER"
+        NEWLINE=`echo $NEWLINE | sed -e 's/:,/:/'`
+        TMPFILE=`mktemp`
+        sed "s/$OSSEC/$NEWLINE/" /etc/group > $TMPFILE
+        cp $TMPFILE /etc/group
+        rm -f $TMPFILE
+        echo "You must restart your web server after this setup is done."
+    fi
+else
+    echo "ossec group does not exist."
+    ERRORS=1
+fi
 
 if [ $ERRORS = 0 ]; then
     echo ""
