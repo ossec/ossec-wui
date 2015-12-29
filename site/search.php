@@ -9,7 +9,7 @@
  * License (version 3) as published by the FSF - Free Software
  * Foundation
  */
-       
+
 /* OS PHP init */
 if (!function_exists('os_handle_start'))
 {
@@ -54,7 +54,7 @@ $used_stored = 0;
 /* Getting search id */
 if(isset($_POST['searchid']))
 {
-    if(preg_match('/[a-z0-9]+/', $_POST['searchid']))
+    if(preg_match('/^[a-z0-9]+$/', $_POST['searchid']))
     {
         $USER_searchid = $_POST['searchid'];
     }
@@ -99,7 +99,7 @@ if(isset($_POST['monitoring']) && ($_POST['monitoring'] == 1))
 /* Reading user input -- being very careful parsing it */
 $datepattern = "/^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})$/";
 if(isset($_POST['initdate']))
-{             
+{
     if(preg_match($datepattern, $_POST['initdate'], $regs))
     {
         $USER_init = mktime($regs[4], $regs[5], 0,$regs[2],$regs[3],$regs[1]);
@@ -107,7 +107,7 @@ if(isset($_POST['initdate']))
     }
 }
 if(isset($_POST['finaldate']))
-{             
+{
     if(preg_match($datepattern, $_POST['finaldate'], $regs) == true)
     {
         $USER_final = mktime($regs[4], $regs[5], 0,$regs[2],$regs[3],$regs[1]);
@@ -115,8 +115,8 @@ if(isset($_POST['finaldate']))
     }
 }
 if(isset($_POST['level']))
-{             
-    if((is_numeric($_POST['level'])) && 
+{
+    if((is_numeric($_POST['level'])) &&
         ($_POST['level'] > 0) &&
         ($_POST['level'] < 16))
     {
@@ -151,7 +151,7 @@ if(isset($_POST['strpattern']))
 /* Getting location */
 if(isset($_POST['locationpattern']))
 {
-    $lcpattern = "/^[0-9a-zA-Z.: _|^!>\/\\-]{1,156}$/";    
+    $lcpattern = "/^[0-9a-zA-Z.: _|^!>\/\\-]{1,156}$/";
     if(preg_match($lcpattern, $_POST['locationpattern']) == true)
     {
         $LOCATION_pattern = $_POST['locationpattern'];
@@ -231,7 +231,7 @@ if(isset($_POST['max_alerts_per_page']))
             $ossec_max_alerts_per_page = $_POST['max_alerts_per_page'];
         }
     }
-}    
+}
 
 
 
@@ -298,15 +298,15 @@ echo '
 <table><tr valign="top">
     <td><input type="radio" name="monitoring" value="0" checked="checked"/>
     </td>
-    <td>From: &nbsp;<input type="text" name="initdate" 
+    <td>From: &nbsp;<input type="text" name="initdate"
     id="i_date_a" size="17"
-    value="'.date('Y-m-d H:i', $u_init_time).'" maxlength="16" 
+    value="'.date('Y-m-d H:i', $u_init_time).'" maxlength="16"
     class="formText" />
     <img src="img/calendar.gif" id="i_trigger" title="Date selector"
     alt="Date selector" class="formText" />
     </td><td>&nbsp;&nbsp;
     To: &nbsp;<input type="text" name="finaldate" id="f_date_a" size="17"
-    value="'.date('Y-m-d H:i', $u_final_time).'" maxlength="16" 
+    value="'.date('Y-m-d H:i', $u_final_time).'" maxlength="16"
     class="formText" />
     <img src="img/calendar.gif" id="f_trigger" title="Date selector"
     alt="Date selector" class="formText" />
@@ -314,7 +314,7 @@ echo '
     </tr>
 ';
 
-echo '<tr><td><input type="radio" name="monitoring" value="1" '.$rt_sk.'/></td> 
+echo '<tr><td><input type="radio" name="monitoring" value="1" '.$rt_sk.'/></td>
       <td>Real time monitoring</td></tr>
       </table>
       <br />
@@ -374,8 +374,8 @@ foreach($global_categories as $_cat_name => $_cat)
 echo '</select>';
 
 /* Str pattern */
-echo '</td></tr><tr><td>    
-    Pattern: </td><td><input type="text" name="strpattern" size="16" 
+echo '</td></tr><tr><td>
+    Pattern: </td><td><input type="text" name="strpattern" size="16"
                     value="'.$u_pattern.'" class="formText" /></td>';
 
 
@@ -409,25 +409,25 @@ echo '</select>';
 
 
 /* Srcip pattern */
-echo '</td></tr><tr><td>    
+echo '</td></tr><tr><td>
     Srcip: </td><td>
-    <input type="text" name="srcippattern" size="16" class="formText" 
+    <input type="text" name="srcippattern" size="16" class="formText"
                     value="'.$u_srcip.'"/>&nbsp;&nbsp;';
 
 /* Rule pattern */
 echo '</td><td>
-    User: </td><td><input type="text" name="userpattern" size="8" 
+    User: </td><td><input type="text" name="userpattern" size="8"
                     value="'.$u_user.'" class="formText" /></td></tr>';
 
 /* Location */
-echo '<tr><td>    
+echo '<tr><td>
     Location:</td><td>
-    <input type="text" name="locationpattern" size="16" class="formText" 
+    <input type="text" name="locationpattern" size="16" class="formText"
                     value="'.$u_location.'"/>&nbsp;&nbsp;';
 
 /* Rule pattern */
 echo '</td><td>
-    Rule id: </td><td><input type="text" name="rulepattern" size="8" 
+    Rule id: </td><td><input type="text" name="rulepattern" size="8"
                     value="'.$u_rule.'" class="formText"/>';
 
 /* Max Alerts  */
@@ -437,12 +437,12 @@ echo '</td></tr><tr><td>
     value="'.$ossec_max_alerts_per_page.'" class="formText" /></td></tr>';
 
 
-/* Agent */    
+/* Agent */
 //foreach ($agent_list as $agent)
-    
+
 /* Final form */
 echo '
-    <tr><td>                    
+    <tr><td>
     <input type="submit" name="search" value="Search" class="button" />
 ';
 
@@ -457,14 +457,14 @@ echo '</td></tr></table>
 echo '
 <script type="text/javascript">
 Calendar.setup({
-button          :   "i_trigger", 
+button          :   "i_trigger",
 inputField     :    "i_date_a",
 ifFormat       :    "%Y-%m-%d %H:%M",
 showsTime      :    true,
 timeFormat     :    "24"
 });
 Calendar.setup({
-button          :   "f_trigger", 
+button          :   "f_trigger",
 inputField     :    "f_date_a",
 ifFormat       :    "%Y-%m-%d %H:%M",
 showsTime      :    true,
@@ -497,7 +497,7 @@ else
 {
     /* Getting alerts */
     $output_list = os_searchalerts($ossec_handle, $USER_searchid,
-                                   $USER_init, $USER_final, 
+                                   $USER_init, $USER_final,
                                    $ossec_max_alerts_per_page,
                                    $USER_level,$USER_rule, $LOCATION_pattern,
                                    $USER_pattern, $USER_group,
@@ -553,7 +553,7 @@ if($output_list[0]{'pg'} > 1)
     echo '
         <input type="submit" name="search" value="<< First" class="button"
                class="formText" />
-                   
+
         <input type="submit" name="search" value="< Prev" class="button"
                class="formText" />
          ';
@@ -563,10 +563,10 @@ if($output_list[0]{'pg'} > 1)
 
 /* Currently page */
 echo '
-    <input type="hidden" name="initdate" 
-           value="'.date('Y-m-d H:i', $u_init_time).'" /> 
-    <input type="hidden" name="finaldate" 
-           value="'.date('Y-m-d H:i', $u_final_time).'" /> 
+    <input type="hidden" name="initdate"
+           value="'.date('Y-m-d H:i', $u_init_time).'" />
+    <input type="hidden" name="finaldate"
+           value="'.date('Y-m-d H:i', $u_final_time).'" />
     <input type="hidden" name="rulepattern" value="'.$u_rule.'" />
     <input type="hidden" name="srcippattern" value="'.$u_srcip.'" />
     <input type="hidden" name="userpattern" value="'.$u_user.'" />
@@ -575,25 +575,25 @@ echo '
     <input type="hidden" name="page" value="'.$USER_page.'" />
     <input type="hidden" name="searchid" value="'.$USER_searchid.'" />
     <input type="hidden" name="monitoring" value="'.$USER_monitoring.'" />
-    <input type="hidden" name="max_alerts_per_page" 
+    <input type="hidden" name="max_alerts_per_page"
                          value="'.$ossec_max_alerts_per_page.'" />';
 
 
 if($output_list[0]{'pg'} > 1)
-{    
-echo '    
+{
+echo '
     &nbsp;&nbsp;
     <input type="submit" name="search" value="Next >" class="button"
            class="formText" />
      <input type="submit" name="search" value="Last >>" class="button"
-           class="formText" />      
+           class="formText" />
     </form>
 ';
 }
 
 
 /* Checking if page exists */
-if(!isset($output_list[0]{$real_page}) || 
+if(!isset($output_list[0]{$real_page}) ||
    (strlen($output_list[$real_page]) < 5) ||
    (!file_exists($output_list[$real_page])))
 {
