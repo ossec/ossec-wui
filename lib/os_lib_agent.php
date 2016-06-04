@@ -108,7 +108,7 @@ function os_getagents($ossec_handle)
             /* Splitting the file. We may have multiple "-". */
             while(1)
             {
-                @list($_name, $_ip) = split("-", $tmp_file, 2);
+                @list($_name, $_ip) = explode("-", $tmp_file, 2);
                 
                 /* Nothing more to split */
                 if(!isset($_name) || !isset($_ip))
