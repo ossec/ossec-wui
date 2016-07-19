@@ -1,3 +1,10 @@
+The OSSEC Web UI is currently unmaintained and deprecated.
+If you are interested in maintaining the project, please contact the OSSEC team (open an issue, send a message to the mailing list, etc).
+
+We recommend using Kibana, Splunk, or similar projects for monitoring alerts.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
 OSSEC Web UI v0.8
 Copyright (c) 2006-2013 Trend Micro Inc.
 
